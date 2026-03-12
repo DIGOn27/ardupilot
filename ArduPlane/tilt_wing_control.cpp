@@ -76,6 +76,19 @@ std::tuple<float, float> Plane::wing_tilt_control()
     //min_angle = -4500; //-45 degrees in centidegrees
     //max_angle = 4500;  //45 degrees in centidegrees
     //front_wing_out = constrain_float(front_wing_out, min_angle, max_angle);
+    
+
+
+
+
+AP::logger().Write("TTW", "TimeUS,Pitch_d,frontW_d,backW_d", "Qfff",
+                                        AP_HAL::micros64(),
+                                        pitch_d,
+                                        front_wing_out,
+                                        back_wing_out);
+
+
+
 
     return std::make_tuple(front_wing_out*100, back_wing_out*100); //values in centidegrees
 }

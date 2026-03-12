@@ -848,7 +848,7 @@ private:
 
 };
 
-// Definition of new mode quad tailsitter with tilt wings
+// Definition of new mode quad tailsitter with manual tilt wings
 class ModeTTWMStabilize : public Mode
 {
 public:
