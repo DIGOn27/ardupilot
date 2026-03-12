@@ -47,6 +47,7 @@ void GCS_Plane::update_vehicle_sensor_status_flags(void)
     case Mode::Number::QLAND:
     case Mode::Number::QLOITER:
     case Mode::Number::TTWSTABILIZE:
+    case Mode::Number::TTWMSTABILIZE:
 #if QAUTOTUNE_ENABLED
     case Mode::Number::QAUTOTUNE:
 #endif

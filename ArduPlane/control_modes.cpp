@@ -96,6 +96,9 @@ Mode *Plane::mode_from_mode_num(const enum Mode::Number num)
     case Mode::Number::TTWSTABILIZE:
         ret = &mode_ttwstabilize;
         break;
+    case Mode::Number::TTWMSTABILIZE:
+        ret = &mode_ttwmstabilize;
+        break;
 
     }
     return ret;
