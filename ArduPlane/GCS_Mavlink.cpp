@@ -44,6 +44,7 @@ MAV_MODE GCS_MAVLINK_Plane::base_mode() const
     case Mode::Number::QHOVER:
     case Mode::Number::QLOITER:
     case Mode::Number::QLAND:
+    case Mode::Number::TTWSTABILIZE:
 #if QAUTOTUNE_ENABLED
     case Mode::Number::QAUTOTUNE:
 #endif
@@ -1550,4 +1551,3 @@ MAV_LANDED_STATE GCS_MAVLINK_Plane::landed_state() const
 
     return MAV_LANDED_STATE_ON_GROUND;
 }
-

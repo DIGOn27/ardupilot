@@ -63,6 +63,7 @@ public:
     friend class ModeQAcro;
     friend class ModeLoiterAltQLand;
     friend class AP_SystemID;
+    friend class ModeTTWStabilize;
 
     QuadPlane(AP_AHRS &_ahrs);
 

@@ -156,6 +156,8 @@ const AP_Param::GroupInfo SRV_Channel::var_info[] = {
     // @Values{Plane, Copter, Rover}: 138:Alarm,139:Alarm Inverted
     // @Values: 140:RCIN1Scaled,141:RCIN2Scaled,142:RCIN3Scaled,143:RCIN4Scaled,144:RCIN5Scaled,145:RCIN6Scaled,146:RCIN7Scaled,147:RCIN8Scaled,148:RCIN9Scaled,149:RCIN10Scaled,150:RCIN11Scaled,151:RCIN12Scaled,152:RCIN13Scaled,153:RCIN14Scaled,154:RCIN15Scaled,155:RCIN16Scaled
     // @Values{Plane, Copter, Rover}: 140:RCIN1Scaled,141:RCIN2Scaled,142:RCIN3Scaled,143:RCIN4Scaled,144:RCIN5Scaled,145:RCIN6Scaled,146:RCIN7Scaled,147:RCIN8Scaled,148:RCIN9Scaled,149:RCIN10Scaled,150:RCIN11Scaled,151:RCIN12Scaled,152:RCIN13Scaled,153:RCIN14Scaled,154:RCIN15Scaled,155:RCIN16Scaled
+    // @Values: 190:FrontWingTilt,191:BackWingTilt
+    // @Values{Plane}: 190:FrontWingTilt,191:BackWingTilt
     // @User: Standard
     // @RebootRequired: True
     AP_GROUPINFO("FUNCTION",  5, SRV_Channel, function, 0),
@@ -361,6 +363,9 @@ bool SRV_Channel::is_control_surface(SRV_Channel::Aux_servo_function_t function)
     case SRV_Channel::Aux_servo_function_t::k_vtail_left:
     case SRV_Channel::Aux_servo_function_t::k_vtail_right:
     case SRV_Channel::Aux_servo_function_t::k_airbrake:
+    // quadcopter tilt wings
+    case SRV_Channel::Aux_servo_function_t::k_front_wing_tilt:
+    case SRV_Channel::Aux_servo_function_t::k_back_wing_tilt:
         return true;
 
     default:

@@ -493,7 +493,7 @@ const AP_Param::Info Plane::var_info[] = {
     // @Param: FLTMODE1
     // @DisplayName: FlightMode1
     // @Description: Flight mode for switch position 1 (910 to 1230 and above 2049)
-    // @Values: 0:Manual,1:CIRCLE,2:STABILIZE,3:TRAINING,4:ACRO,5:FBWA,6:FBWB,7:CRUISE,8:AUTOTUNE,10:Auto,11:RTL,12:Loiter,13:TAKEOFF,14:AVOID_ADSB,15:Guided,17:QSTABILIZE,18:QHOVER,19:QLOITER,20:QLAND,21:QRTL,22:QAUTOTUNE,23:QACRO,24:THERMAL,25:Loiter to QLand
+    // @Values: 0:Manual,1:CIRCLE,2:STABILIZE,3:TRAINING,4:ACRO,5:FBWA,6:FBWB,7:CRUISE,8:AUTOTUNE,10:Auto,11:RTL,12:Loiter,13:TAKEOFF,14:AVOID_ADSB,15:Guided,17:QSTABILIZE,18:QHOVER,19:QLOITER,20:QLAND,21:QRTL,22:QAUTOTUNE,23:QACRO,24:THERMAL,25:Loiter to QLand,27:TTWSTABILIZE
     // @User: Standard
     GSCALAR(flight_mode1,           "FLTMODE1",       FLIGHT_MODE_1),
 
@@ -1034,6 +1034,240 @@ const AP_Param::Info Plane::var_info[] = {
     // @Path: ../libraries/AP_Quicktune/AP_Quicktune.cpp
     GOBJECT(quicktune, "QWIK_",  AP_Quicktune),
 #endif
+
+    // @Param: Tilt_wing_x1
+    // @DisplayName: tilt wing interpolation point 1 x
+    // @Description: interpolation point 1 x coordinate for tilt wing curve mapping.
+    // @Units: deg
+    // @Range: 0 60
+    // @Increment: 0.01
+    // @User: Standard
+    GSCALAR(tilt_wing_x1,     "TILT_WING_X1",  0),
+
+    // @Param: Tilt_wing_y1
+    // @DisplayName: tilt wing interpolation point 1 y
+    // @Description: interpolation point 1 y coordinate for tilt wing curve mapping.
+    // @Units: deg
+    // @Range: 0 60
+    // @Increment: 0.01
+    // @User: Standard
+    GSCALAR(tilt_wing_y1,     "TILT_WING_Y1",  0),
+
+    // @Param: Tilt_wing_x2
+    // @DisplayName: tilt wing interpolation point 2 x
+    // @Description: interpolation point 2 x coordinate for tilt wing curve mapping.
+    // @Units: deg
+    // @Range: 0 60
+    // @Increment: 0.01
+    // @User: Standard
+    GSCALAR(tilt_wing_x2,     "TILT_WING_X2",  0),
+
+    // @Param: Tilt_wing_y2
+    // @DisplayName: tilt wing interpolation point 2 y
+    // @Description: interpolation point 2 y coordinate for tilt wing curve mapping.
+    // @Units: deg
+    // @Range: 0 60
+    // @Increment: 0.01
+    // @User: Standard
+    GSCALAR(tilt_wing_y2,     "TILT_WING_Y2",  0),
+
+    // @Param: Tilt_wing_x3
+    // @DisplayName: tilt wing interpolation point 3 x
+    // @Description: interpolation point 3 x coordinate for tilt wing curve mapping.
+    // @Units: deg
+    // @Range: 0 60
+    // @Increment: 0.01
+    // @User: Standard
+    GSCALAR(tilt_wing_x3,     "TILT_WING_X3",  0),
+
+    // @Param: Tilt_wing_y3
+    // @DisplayName: tilt wing interpolation point 3 y
+    // @Description: interpolation point 3 y coordinate for tilt wing curve mapping.
+    // @Units: deg
+    // @Range: 0 60
+    // @Increment: 0.01
+    // @User: Standard
+    GSCALAR(tilt_wing_y3,     "TILT_WING_Y3",  0),
+
+    // @Param: Tilt_wing_x4
+    // @DisplayName: tilt wing interpolation point 4 x
+    // @Description: interpolation point 4 x coordinate for tilt wing curve mapping.
+    // @Units: deg
+    // @Range: 0 60
+    // @Increment: 0.01
+    // @User: Standard
+    GSCALAR(tilt_wing_x4,     "TILT_WING_X4",  0), 
+
+    // @Param: Tilt_wing_y4
+    // @DisplayName: tilt wing interpolation point 4 y
+    // @Description: interpolation point 4 y coordinate for tilt wing curve mapping.
+    // @Units: deg
+    // @Range: 0 60
+    // @Increment: 0.01
+    // @User: Standard
+    GSCALAR(tilt_wing_y4,     "TILT_WING_Y4",  0),
+
+    // @Param: Tilt_wing_x5
+    // @DisplayName: tilt wing interpolation point 5 x
+    // @Description: interpolation point 5 x coordinate for tilt wing curve mapping.
+    // @Units: deg
+    // @Range: 0 60
+    // @Increment: 0.01
+    // @User: Standard
+    GSCALAR(tilt_wing_x5,     "TILT_WING_X5",  0),
+
+    // @Param: Tilt_wing_y5
+    // @DisplayName: tilt wing interpolation point 5 y
+    // @Description: interpolation point 5 y coordinate for tilt wing curve mapping.
+    // @Units: deg
+    // @Range: 0 60
+    // @Increment: 0.01
+    // @User: Standard
+    GSCALAR(tilt_wing_y5,     "TILT_WING_Y5",  0),
+
+    // @Param: Tilt_wing_x6
+    // @DisplayName: tilt wing interpolation point 6 x
+    // @Description: interpolation point 6 x coordinate for tilt wing curve mapping.
+    // @Units: deg
+    // @Range: 0 60
+    // @Increment: 0.01
+    // @User: Standard
+    GSCALAR(tilt_wing_x6,     "TILT_WING_X6",  0),
+
+    // @Param: Tilt_wing_y6
+    // @DisplayName: tilt wing interpolation point 6 y
+    // @Description: interpolation point 6 y coordinate for tilt wing curve mapping.
+    // @Units: deg
+    // @Range: 0 60
+    // @Increment: 0.01
+    // @User: Standard
+    GSCALAR(tilt_wing_y6,     "TILT_WING_Y6",  0),
+
+    // @Param: Tilt_wing_x7
+    // @DisplayName: tilt wing interpolation point 7 x
+    // @Description: interpolation point 7 x coordinate for tilt wing curve mapping.
+    // @Units: deg
+    // @Range: 0 60
+    // @Increment: 0.01
+    // @User: Standard
+    GSCALAR(tilt_wing_x7,     "TILT_WING_X7",  0),
+
+    // @Param: Tilt_wing_y7
+    // @DisplayName: tilt wing interpolation point 7 y
+    // @Description: interpolation point 7 y coordinate for tilt wing curve mapping.
+    // @Units: deg
+    // @Range: 0 60
+    // @Increment: 0.01
+    // @User: Standard
+    GSCALAR(tilt_wing_y7,     "TILT_WING_Y7",  0),
+
+    // @Param: Tilt_wing_x8
+    // @DisplayName: tilt wing interpolation point 8 x
+    // @Description: interpolation point 8 x coordinate for tilt wing curve mapping.
+    // @Units: deg
+    // @Range: 0 60
+    // @Increment: 0.01
+    // @User: Standard
+    GSCALAR(tilt_wing_x8,     "TILT_WING_X8",  0),
+
+    // @Param: Tilt_wing_y8
+    // @DisplayName: tilt wing interpolation point 8 y
+    // @Description: interpolation point 8 y coordinate for tilt wing curve mapping.
+    // @Units: deg
+    // @Range: 0 60
+    // @Increment: 0.01
+    // @User: Standard
+    GSCALAR(tilt_wing_y8,     "TILT_WING_Y8",  0),
+
+    // @Param: Tilt_wing_x9
+    // @DisplayName: tilt wing interpolation point 9 x
+    // @Description: interpolation point 9 x coordinate for tilt wing curve mapping.
+    // @Units: deg
+    // @Range: 0 60
+    // @Increment: 0.01
+    // @User: Standard
+    GSCALAR(tilt_wing_x9,     "TILT_WING_X9",  0),
+
+    // @Param: Tilt_wing_y9
+    // @DisplayName: tilt wing interpolation point 9 y
+    // @Description: interpolation point 9 y coordinate for tilt wing curve mapping.
+    // @Units: deg
+    // @Range: 0 60
+    // @Increment: 0.01
+    // @User: Standard
+    GSCALAR(tilt_wing_y9,     "TILT_WING_Y9",  0),
+
+    // @Param: Tilt_wing_x10
+    // @DisplayName: tilt wing interpolation point 10 x
+    // @Description: interpolation point 10 x coordinate for tilt wing curve mapping.
+    // @Units: deg
+    // @Range: 0 60
+    // @Increment: 0.01
+    // @User: Standard
+    GSCALAR(tilt_wing_x10,     "TILT_WING_X10",  0),
+
+    // @Param: Tilt_wing_y10
+    // @DisplayName: tilt wing interpolation point 10 y
+    // @Description: interpolation point 10 y coordinate for tilt wing curve mapping.
+    // @Units: deg
+    // @Range: 0 60
+    // @Increment: 0.01
+    // @User: Standard
+    GSCALAR(tilt_wing_y10,     "TILT_WING_Y10",  0),
+
+    // @Param: Tilt_wing_x11
+    // @DisplayName: tilt wing interpolation point 11 x
+    // @Description: interpolation point 11 x coordinate for tilt wing curve mapping.
+    // @Units: deg
+    // @Range: 0 60
+    // @Increment: 0.01
+    // @User: Standard
+    GSCALAR(tilt_wing_x11,     "TILT_WING_X11",  0),
+
+    // @Param: Tilt_wing_y11
+    // @DisplayName: tilt wing interpolation point 11 y
+    // @Description: interpolation point 11 y coordinate for tilt wing curve mapping.
+    // @Units: deg
+    // @Range: 0 60
+    // @Increment: 0.01
+    // @User: Standard
+    GSCALAR(tilt_wing_y11,     "TILT_WING_Y11",  0),
+
+    // @Param: Tilt_wing_x12
+    // @DisplayName: tilt wing interpolation point 12 x
+    // @Description: interpolation point 12 x coordinate for tilt wing curve mapping.
+    // @Units: deg
+    // @Range: 0 60
+    // @Increment: 0.01
+    // @User: Standard
+    GSCALAR(tilt_wing_x12,     "TILT_WING_X12",  0),
+
+    // @Param: Tilt_wing_y12
+    // @DisplayName: tilt wing interpolation point 12 y
+    // @Description: interpolation point 12 y coordinate for tilt wing curve mapping.
+    // @Units: deg
+    // @Range: 0 60
+    // @Increment: 0.01
+    // @User: Standard
+    GSCALAR(tilt_wing_y12,     "TILT_WING_Y12",  0),
+
+    // @Param: Tilt_wing_x13
+    // @DisplayName: tilt wing interpolation point 13 x
+    // @Description: interpolation point 13 x coordinate for tilt wing curve mapping.
+    // @Units: deg
+    // @Range: 0 60
+    // @Increment: 0.01
+    // @User: Standard
+    GSCALAR(tilt_wing_x13,     "TILT_WING_X13",  0),
+
+    // @Param: Tilt_wing_y13
+    // @DisplayName: tilt wing interpolation point 13 y
+    // @Description: interpolation point 13 y coordinate for tilt wing curve mapping.
+    // @Units: deg
+    // @Range: 0 60
+    // @Increment: 0.01
+    // @User: Standard
+    GSCALAR(tilt_wing_y13,     "TILT_WING_Y13",  0),
 
     AP_VAREND
 };

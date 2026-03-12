@@ -170,6 +170,7 @@ public:
     friend class ModeQRTL;
     friend class ModeQAcro;
     friend class ModeQAutotune;
+    friend class ModeTTWStabilize;
     friend class ModeTakeoff;
     friend class ModeThermal;
     friend class ModeLoiterAltQLand;
@@ -324,6 +325,7 @@ private:
     ModeQLand mode_qland;
     ModeQRTL mode_qrtl;
     ModeQAcro mode_qacro;
+    ModeTTWStabilize mode_ttwstabilize;
     ModeLoiterAltQLand mode_loiter_qland;
 #if QAUTOTUNE_ENABLED
     ModeQAutotune mode_qautotune;
@@ -941,6 +943,10 @@ private:
     int16_t calc_nav_yaw_coordinated();
     int16_t calc_nav_yaw_course(void);
     int16_t calc_nav_yaw_ground(void);
+
+    //tilt_wing_control.cpp
+    void set_tilt_wing_out();
+    std::tuple<float, float> wing_tilt_control();
 
 #if HAL_LOGGING_ENABLED
 

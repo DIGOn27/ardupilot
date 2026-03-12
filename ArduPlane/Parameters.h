@@ -362,6 +362,36 @@ public:
 
         k_param_pullup = 270,
         k_param_quicktune,
+
+
+        // 300: tilt wing tailsitter interpolation points
+        k_param_tilt_wing_x1 = 300,
+        k_param_tilt_wing_y1,
+        k_param_tilt_wing_x2,
+        k_param_tilt_wing_y2,
+        k_param_tilt_wing_x3,
+        k_param_tilt_wing_y3,
+        k_param_tilt_wing_x4,
+        k_param_tilt_wing_y4,
+        k_param_tilt_wing_x5,
+        k_param_tilt_wing_y5,
+        k_param_tilt_wing_x6,
+        k_param_tilt_wing_y6,
+        k_param_tilt_wing_x7,
+        k_param_tilt_wing_y7,
+        k_param_tilt_wing_x8,
+        k_param_tilt_wing_y8,
+        k_param_tilt_wing_x9,
+        k_param_tilt_wing_y9,
+        k_param_tilt_wing_x10,
+        k_param_tilt_wing_y10,
+        k_param_tilt_wing_x11,
+        k_param_tilt_wing_y11,
+        k_param_tilt_wing_x12,
+        k_param_tilt_wing_y12,
+        k_param_tilt_wing_x13,
+        k_param_tilt_wing_y13,
+
     };
 
     AP_Int16 format_version;
@@ -472,6 +502,35 @@ public:
     AP_Int8 override_channel;
 #endif
     AP_Int16 gcs_pid_mask;
+
+    // Tilt wing tailsitter interpolation points
+    AP_Float tilt_wing_x1;
+    AP_Float tilt_wing_y1;
+    AP_Float tilt_wing_x2;
+    AP_Float tilt_wing_y2;
+    AP_Float tilt_wing_x3;
+    AP_Float tilt_wing_y3;
+    AP_Float tilt_wing_x4;
+    AP_Float tilt_wing_y4;
+    AP_Float tilt_wing_x5;
+    AP_Float tilt_wing_y5;
+    AP_Float tilt_wing_x6;
+    AP_Float tilt_wing_y6;
+    AP_Float tilt_wing_x7;
+    AP_Float tilt_wing_y7;
+    AP_Float tilt_wing_x8;
+    AP_Float tilt_wing_y8;
+    AP_Float tilt_wing_x9;
+    AP_Float tilt_wing_y9;
+    AP_Float tilt_wing_x10;
+    AP_Float tilt_wing_y10;
+    AP_Float tilt_wing_x11;
+    AP_Float tilt_wing_y11;
+    AP_Float tilt_wing_x12;
+    AP_Float tilt_wing_y12;
+    AP_Float tilt_wing_x13;
+    AP_Float tilt_wing_y13;
+
 };
 
 /*
