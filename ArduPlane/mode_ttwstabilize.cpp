@@ -66,7 +66,7 @@ void ModeTTWStabilize::run()
     plane.stabilize_pitch();
 
     // set tilt wings output
-    plane.set_tilt_wing_out();
+    //plane.set_tilt_wing_out();
 
 
     // Center rudder

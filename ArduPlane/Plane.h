@@ -1193,6 +1193,7 @@ private:
                                 SRV_Channel::Aux_servo_function_t func1_out, SRV_Channel::Aux_servo_function_t func2_out) const;
     void flaperon_update();
     void indicate_waiting_for_rud_neutral_to_takeoff(void);
+    void set_tilt_wing_servos();
 
     // is_flying.cpp
     void update_is_flying_5Hz(void);

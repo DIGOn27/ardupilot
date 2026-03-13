@@ -814,6 +814,42 @@ void Plane::force_flare(void)
 #endif
 }
 
+//Set tilt wing servos for tilt wing tailsitter
+void Plane::set_tilt_wing_servos(void)
+{
+    //if  (control_mode != &mode_ttwstabilize){
+        //RC_Channel *channel_tiltwing = rc().find_channel_for_option(RC_Channel::AUX_FUNC::WING_TILT);
+        
+        //int8_t front_wing_tilt_percent = 0;
+        //int8_t back_wing_tilt_percent = 0;
+
+        //front_wing_tilt_percent = channel_pitch->percent_input();  //rc().find_channel_for_option(RC_Channel::AUX_FUNC::WING_TILT)->percent_input();
+        //back_wing_tilt_percent = channel_pitch->percent_input();   //rc().find_channel_for_option(RC_Channel::AUX_FUNC::WING_TILT)->percent_input();
+
+        //float front_wing_out  = constrain_float(front_wing_tilt_percent * 4500, -4500, 4500);
+        //float back_wing_out = constrain_float(back_wing_tilt_percent * 4500, -4500, 4500);
+
+        //float front_wing_out  = SRV_Channels::get_output_scaled(SRV_Channel::k_rcin12_mapped);
+        //float back_wing_out  = SRV_Channels::get_output_scaled(SRV_Channel::k_rcin12_mapped);
+
+
+        //float front_wing_out  = 2500;//front_wing_tilt_percent * 45;
+        //float back_wing_out = 1500;//back_wing_tilt_percent * 45;
+
+        SRV_Channels::set_output_scaled(SRV_Channel::k_front_wing_tilt, 0.0);
+        SRV_Channels::set_output_scaled(SRV_Channel::k_back_wing_tilt, 0.0);
+
+        //AP::logger().Write("TTWS", "TimeUS,frontW_d,backW_d", "Qff",
+                                        //AP_HAL::micros64(),
+                                        //front_wing_out,
+                                        //back_wing_out);
+    //}
+}
+
+
+
+
+
 /* Set the flight control servos based on the current calculated values
 
   This function operates by first building up output values for
@@ -881,6 +917,10 @@ void Plane::set_servos(void)
 
     // slew rate limit throttle
     throttle_slew_limit(SRV_Channel::k_throttle);
+
+    //set tilt wing servos for tilt wing tailsitter
+    //set_tilt_wing_servos();
+    plane.set_tilt_wing_out();
 
     int8_t min_throttle = 0;
 #if AP_ICENGINE_ENABLED

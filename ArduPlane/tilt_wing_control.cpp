@@ -8,10 +8,19 @@ set wing angle output
 */
 void Plane::set_tilt_wing_out()
 {
-    float front_wing_out, back_wing_out;
-    std::tie(front_wing_out, back_wing_out)= wing_tilt_control();
-    SRV_Channels::set_output_scaled(SRV_Channel::k_front_wing_tilt, front_wing_out);
-    SRV_Channels::set_output_scaled(SRV_Channel::k_back_wing_tilt, back_wing_out);
+    if(plane.control_mode == &plane.mode_ttwstabilize){
+        float front_wing_out, back_wing_out;
+        std::tie(front_wing_out, back_wing_out)= wing_tilt_control();
+        SRV_Channels::set_output_scaled(SRV_Channel::k_front_wing_tilt, 0);
+        SRV_Channels::set_output_scaled(SRV_Channel::k_back_wing_tilt, 0);
+        return;
+    }
+    else if (plane.control_mode != &plane.mode_ttwstabilize){
+        SRV_Channels::set_output_scaled(SRV_Channel::k_front_wing_tilt, 0);
+        SRV_Channels::set_output_scaled(SRV_Channel::k_back_wing_tilt, 0);
+    }
+    
+
 }
 
 /*
@@ -81,11 +90,11 @@ std::tuple<float, float> Plane::wing_tilt_control()
 
 
 
-AP::logger().Write("TTW", "TimeUS,Pitch_d,frontW_d,backW_d", "Qfff",
-                                        AP_HAL::micros64(),
-                                        pitch_d,
-                                        front_wing_out,
-                                        back_wing_out);
+//AP::logger().Write("TTW", "TimeUS,Pitch_d,frontW_d,backW_d", "Qfff",
+                                        //AP_HAL::micros64(),
+                                        //pitch_d,
+                                        //front_wing_out,
+                                        //back_wing_out);
 
 
 
