@@ -11,8 +11,8 @@ void Plane::set_tilt_wing_out()
     if(plane.control_mode == &plane.mode_ttwstabilize){
         float front_wing_out, back_wing_out;
         std::tie(front_wing_out, back_wing_out)= wing_tilt_control();
-        SRV_Channels::set_output_scaled(SRV_Channel::k_front_wing_tilt, 0);
-        SRV_Channels::set_output_scaled(SRV_Channel::k_back_wing_tilt, 0);
+        SRV_Channels::set_output_scaled(SRV_Channel::k_front_wing_tilt, front_wing_out);
+        SRV_Channels::set_output_scaled(SRV_Channel::k_back_wing_tilt, back_wing_out);
         return;
     }
     else if (plane.control_mode != &plane.mode_ttwstabilize){
