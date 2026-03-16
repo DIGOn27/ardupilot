@@ -19,8 +19,20 @@ void Plane::set_tilt_wing_out()
         return;
     }
     else if (plane.control_mode != &plane.mode_ttwstabilize){
-        SRV_Channels::set_output_scaled(SRV_Channel::k_front_wing_tilt, 0);
-        SRV_Channels::set_output_scaled(SRV_Channel::k_back_wing_tilt, 0);
+        
+        RC_Channel *channel_tiltwing = rc().find_channel_for_option(RC_Channel::AUX_FUNC::WING_TILT);
+        
+        int8_t front_wing_tilt_percent = 0;
+        int8_t back_wing_tilt_percent = 0;
+
+        front_wing_tilt_percent = rc().find_channel_for_option(RC_Channel::AUX_FUNC::WING_TILT)->percent_input();
+        back_wing_tilt_percent = rc().find_channel_for_option(RC_Channel::AUX_FUNC::WING_TILT)->percent_input();
+
+        float front_wing_out  = constrain_float(front_wing_tilt_percent * 4500, -4500, 4500);
+        float back_wing_out = constrain_float(back_wing_tilt_percent * 4500, -4500, 4500);
+        
+        SRV_Channels::set_output_scaled(SRV_Channel::k_front_wing_tilt, front_wing_out);
+        SRV_Channels::set_output_scaled(SRV_Channel::k_back_wing_tilt, back_wing_out);
 
         SRV_Channels::set_slew_rate(SRV_Channel::k_front_wing_tilt, g.flap_slewrate, 9000, G_Dt);
         SRV_Channels::set_slew_rate(SRV_Channel::k_back_wing_tilt, g.flap_slewrate, 9000, G_Dt);
@@ -96,11 +108,11 @@ std::tuple<float, float> Plane::wing_tilt_control()
 
 
 
-//AP::logger().Write("TTW", "TimeUS,Pitch_d,frontW_d,backW_d", "Qfff",
-                                        //AP_HAL::micros64(),
-                                        //pitch_d,
-                                        //front_wing_out,
-                                        //back_wing_out);
+AP::logger().Write("TTW", "TimeUS,Pitch_d,frontW_d,backW_d", "Qfff",
+                                        AP_HAL::micros64(),
+                                        pitch_d,
+                                        front_wing_out,
+                                        back_wing_out);
 
 
 
