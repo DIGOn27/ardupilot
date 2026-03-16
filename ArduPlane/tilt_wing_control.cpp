@@ -14,16 +14,16 @@ void Plane::set_tilt_wing_out()
         SRV_Channels::set_output_scaled(SRV_Channel::k_front_wing_tilt, front_wing_out);
         SRV_Channels::set_output_scaled(SRV_Channel::k_back_wing_tilt, back_wing_out);
 
-        SRV_Channels::set_slew_rate(SRV_Channel::k_front_wing_tilt, g.flap_slewrate, 100, G_Dt);
-        SRV_Channels::set_slew_rate(SRV_Channel::k_back_wing_tilt, g.flap_slewrate, 100, G_Dt);
+        //SRV_Channels::set_slew_rate(SRV_Channel::k_front_wing_tilt, g.flap_slewrate, 100, G_Dt);
+        //SRV_Channels::set_slew_rate(SRV_Channel::k_back_wing_tilt, g.flap_slewrate, 100, G_Dt);
         return;
     }
     else if (plane.control_mode != &plane.mode_ttwstabilize){
         SRV_Channels::set_output_scaled(SRV_Channel::k_front_wing_tilt, 0);
         SRV_Channels::set_output_scaled(SRV_Channel::k_back_wing_tilt, 0);
 
-        SRV_Channels::set_slew_rate(SRV_Channel::k_front_wing_tilt, g.flap_slewrate, 100, G_Dt);
-        SRV_Channels::set_slew_rate(SRV_Channel::k_back_wing_tilt, g.flap_slewrate, 100, G_Dt);
+        //SRV_Channels::set_slew_rate(SRV_Channel::k_front_wing_tilt, g.flap_slewrate, 100, G_Dt);
+        //SRV_Channels::set_slew_rate(SRV_Channel::k_back_wing_tilt, g.flap_slewrate, 100, G_Dt);
     }
     
 
