@@ -22,8 +22,8 @@ void Plane::set_tilt_wing_out()
         
         //RC_Channel *channel_tiltwing = rc().find_channel_for_option(RC_Channel::AUX_FUNC::WING_TILT);
         
-        int8_t front_wing_tilt_percent = 0;
-        int8_t back_wing_tilt_percent = 0;
+        float front_wing_tilt_percent = 0;
+        float back_wing_tilt_percent = 0;
 
         front_wing_tilt_percent = rc().find_channel_for_option(RC_Channel::AUX_FUNC::WING_TILT)->norm_input_ignore_trim();
         back_wing_tilt_percent = rc().find_channel_for_option(RC_Channel::AUX_FUNC::WING_TILT)->norm_input_ignore_trim();
