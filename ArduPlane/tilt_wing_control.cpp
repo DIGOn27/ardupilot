@@ -20,7 +20,7 @@ void Plane::set_tilt_wing_out()
     }
     else if (plane.control_mode != &plane.mode_ttwstabilize){
         
-        RC_Channel *channel_tiltwing = rc().find_channel_for_option(RC_Channel::AUX_FUNC::WING_TILT);
+        //RC_Channel *channel_tiltwing = rc().find_channel_for_option(RC_Channel::AUX_FUNC::WING_TILT);
         
         int8_t front_wing_tilt_percent = 0;
         int8_t back_wing_tilt_percent = 0;
