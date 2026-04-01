@@ -36,6 +36,18 @@ void Plane::set_tilt_wing_out()
 
         SRV_Channels::set_slew_rate(SRV_Channel::k_front_wing_tilt, g.flap_slewrate, 9000, G_Dt);
         SRV_Channels::set_slew_rate(SRV_Channel::k_back_wing_tilt, g.flap_slewrate, 9000, G_Dt);
+
+        
+        float pitch_d, front_wing_out, back_wing_out;
+        pitch_d = degrees(quadplane.ahrs_view->pitch);
+        front_wing_out = front_wing_tilt_percent * 45;
+        back_wing_out = back_wing_tilt_percent * 45;
+
+        AP::logger().Write("TTW", "TimeUS,Pitch_d,frontW_d,backW_d", "Qfff",
+                                        AP_HAL::micros64(),
+                                        pitch_d,
+                                        front_wing_out,
+                                        back_wing_out);
     }
     
 
