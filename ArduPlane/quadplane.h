@@ -65,6 +65,8 @@ public:
     friend class AP_SystemID;
     friend class ModeTTWStabilize;
     friend class ModeTTWMStabilize;
+    friend class ModeTTWHover;
+    friend class ModeTTWLoiter;
 
     QuadPlane(AP_AHRS &_ahrs);
 

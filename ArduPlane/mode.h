@@ -65,6 +65,8 @@ public:
 #if HAL_QUADPLANE_ENABLED
         TTWSTABILIZE  = 27,  // Definition of new mode quad tailsitter with tilt wings
         TTWMSTABILIZE  = 28,  // Definition of new mode quad tailsitter with manual tilt wings
+        TTWHOVER       = 29,  // Definition of new mode quad tailsitter with tilt wings qhover mode
+        TTWLOITER     = 30,  // Definition of new mode quad tailsitter with tilt wings qloiter mode
 #endif
 
     // Mode number 30 reserved for "offboard" for external/lua control.
@@ -883,6 +885,75 @@ private:
 
 };
 
+// Definition of new mode quad tailsitter with tilt wings qhover mode
+class ModeTTWHover : public Mode
+{
+public:
+
+    Number mode_number() const override { return Number::TTWHOVER; }
+    const char *name() const override { return "TTWHOVER"; }
+    const char *name4() const override { return "TTWH"; }
+
+    bool is_vtol_mode() const override { return true; }
+    bool is_vtol_man_throttle() const override { return true; }
+    virtual bool is_vtol_man_mode() const override { return true; }
+    bool allows_throttle_nudging() const override { return true; }
+
+    // methods that affect movement of the vehicle in this mode
+    void update() override;
+
+    // used as a base class for all Q modes
+    bool _enter() override;
+
+    void run() override;
+
+#if AP_PLANE_SYSTEMID_ENABLED
+    // does this mode support systemid?
+    bool supports_systemid() const override { return true; }
+#endif
+    
+protected:
+private:
+
+    void set_tailsitter_roll_pitch(const float roll_input, const float pitch_input);
+    void set_limited_roll_pitch(const float roll_input, const float pitch_input);
+
+};
+
+// Definition of new mode quad tailsitter with tilt wings
+class ModeTTWLoiter : public Mode
+{
+public:
+
+    Number mode_number() const override { return Number::TTWLOITER; }
+    const char *name() const override { return "TTWLOITER"; }
+    const char *name4() const override { return "TTWL"; }
+
+    bool is_vtol_mode() const override { return true; }
+    bool is_vtol_man_throttle() const override { return true; }
+    virtual bool is_vtol_man_mode() const override { return true; }
+    bool allows_throttle_nudging() const override { return true; }
+
+    // methods that affect movement of the vehicle in this mode
+    void update() override;
+
+    // used as a base class for all Q modes
+    bool _enter() override;
+
+    void run() override;
+
+#if AP_PLANE_SYSTEMID_ENABLED
+    // does this mode support systemid?
+    bool supports_systemid() const override { return true; }
+#endif
+    
+protected:
+private:
+
+    void set_tailsitter_roll_pitch(const float roll_input, const float pitch_input);
+    void set_limited_roll_pitch(const float roll_input, const float pitch_input);
+
+};
 
 #if QAUTOTUNE_ENABLED
 class ModeQAutotune : public Mode

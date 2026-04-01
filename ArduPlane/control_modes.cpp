@@ -99,6 +99,12 @@ Mode *Plane::mode_from_mode_num(const enum Mode::Number num)
     case Mode::Number::TTWMSTABILIZE:
         ret = &mode_ttwmstabilize;
         break;
+    case Mode::Number::TTWHOVER:
+        ret = &mode_ttwhover;
+        break;
+    case Mode::Number::TTWLOITER:
+        ret = &mode_ttwloiter;
+        break;
 
     }
     return ret;
