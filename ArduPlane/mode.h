@@ -895,15 +895,10 @@ public:
     const char *name4() const override { return "TTWH"; }
 
     bool is_vtol_mode() const override { return true; }
-    bool is_vtol_man_throttle() const override { return true; }
     virtual bool is_vtol_man_mode() const override { return true; }
-    bool allows_throttle_nudging() const override { return true; }
 
     // methods that affect movement of the vehicle in this mode
     void update() override;
-
-    // used as a base class for all Q modes
-    bool _enter() override;
 
     void run() override;
 
@@ -913,11 +908,11 @@ public:
 #endif
     
 protected:
-private:
 
-    void set_tailsitter_roll_pitch(const float roll_input, const float pitch_input);
-    void set_limited_roll_pitch(const float roll_input, const float pitch_input);
-
+    bool _enter() override;
+#if AP_QUICKTUNE_ENABLED
+    bool supports_quicktune() const override { return true; }
+#endif
 };
 
 // Definition of new mode quad tailsitter with tilt wings
@@ -930,15 +925,10 @@ public:
     const char *name4() const override { return "TTWL"; }
 
     bool is_vtol_mode() const override { return true; }
-    bool is_vtol_man_throttle() const override { return true; }
     virtual bool is_vtol_man_mode() const override { return true; }
-    bool allows_throttle_nudging() const override { return true; }
 
     // methods that affect movement of the vehicle in this mode
     void update() override;
-
-    // used as a base class for all Q modes
-    bool _enter() override;
 
     void run() override;
 
@@ -948,11 +938,13 @@ public:
 #endif
     
 protected:
-private:
 
-    void set_tailsitter_roll_pitch(const float roll_input, const float pitch_input);
-    void set_limited_roll_pitch(const float roll_input, const float pitch_input);
+    bool _enter() override;
+    uint32_t last_target_loc_set_ms;
 
+#if AP_QUICKTUNE_ENABLED
+    bool supports_quicktune() const override { return true; }
+#endif
 };
 
 #if QAUTOTUNE_ENABLED

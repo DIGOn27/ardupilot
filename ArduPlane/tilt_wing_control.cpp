@@ -8,7 +8,7 @@ set wing angle output
 */
 void Plane::set_tilt_wing_out()
 {
-    if(plane.control_mode == &plane.mode_ttwstabilize){
+    if(plane.control_mode == &plane.mode_ttwstabilize || plane.control_mode == &plane.mode_ttwhover || plane.control_mode == &plane.mode_ttwloiter){
         float front_wing_out, back_wing_out;
         std::tie(front_wing_out, back_wing_out)= wing_tilt_control();
         SRV_Channels::set_output_scaled(SRV_Channel::k_front_wing_tilt, front_wing_out);
@@ -18,7 +18,7 @@ void Plane::set_tilt_wing_out()
         SRV_Channels::set_slew_rate(SRV_Channel::k_back_wing_tilt, g.flap_slewrate, 9000, G_Dt);
         return;
     }
-    else if (plane.control_mode != &plane.mode_ttwstabilize){
+    else {
         
         //RC_Channel *channel_tiltwing = rc().find_channel_for_option(RC_Channel::AUX_FUNC::WING_TILT);
         

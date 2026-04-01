@@ -89,9 +89,9 @@ void ModeTTWLoiter::run()
         plane.stabilize_pitch();
         return;
     }
-    if (!quadplane.motors->armed()) {
-        plane.mode_qloiter._enter();
-    }
+    //if (!quadplane.motors->armed()) {
+    //    plane.mode_qloiter._enter();
+    //}
 
     if (quadplane.should_relax()) {
         loiter_nav->soften_for_landing();
