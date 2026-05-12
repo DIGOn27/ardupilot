@@ -1276,7 +1276,7 @@ const AP_Param::Info Plane::var_info[] = {
     // @Range: 0 20
     // @Increment: 0.01
     // @User: Standard
-    GSCALAR(tilt_wing_yaw_max,     "TILT_WING_YAW_MAX",  0),
+    GSCALAR(tilt_wing_yaw_max,     "TILT_WING_YAW_MAX",  10),
 
     AP_VAREND
 };

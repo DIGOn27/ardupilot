@@ -391,6 +391,7 @@ public:
         k_param_tilt_wing_y12,
         k_param_tilt_wing_x13,
         k_param_tilt_wing_y13,
+        k_param_tilt_wing_yaw_max,
 
     };
 
