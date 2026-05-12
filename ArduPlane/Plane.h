@@ -174,6 +174,7 @@ public:
     friend class ModeTTWMStabilize;
     friend class ModeTTWHover;
     friend class ModeTTWLoiter;
+    friend class ModeTTWYaw;
     friend class ModeTakeoff;
     friend class ModeThermal;
     friend class ModeLoiterAltQLand;
@@ -332,6 +333,7 @@ private:
     ModeTTWMStabilize mode_ttwmstabilize;
     ModeTTWHover mode_ttwhover;
     ModeTTWLoiter mode_ttwloiter;
+    ModeTTWYaw mode_ttwyaw;
     ModeLoiterAltQLand mode_loiter_qland;
 #if QAUTOTUNE_ENABLED
     ModeQAutotune mode_qautotune;

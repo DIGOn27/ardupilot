@@ -55,6 +55,7 @@ void Plane::failsafe_short_on_event(enum failsafe_state fstype, ModeReason reaso
     case Mode::Number::TTWMSTABILIZE:
     case Mode::Number::TTWHOVER:
     case Mode::Number::TTWLOITER:
+    case Mode::Number::TTWYAW:
 #if QAUTOTUNE_ENABLED
     case Mode::Number::QAUTOTUNE:
 #endif
@@ -163,6 +164,7 @@ void Plane::failsafe_long_on_event(enum failsafe_state fstype, ModeReason reason
     case Mode::Number::TTWMSTABILIZE:
     case Mode::Number::TTWHOVER:
     case Mode::Number::TTWLOITER:
+    case Mode::Number::TTWYAW:
 #if QAUTOTUNE_ENABLED
     case Mode::Number::QAUTOTUNE:
 #endif

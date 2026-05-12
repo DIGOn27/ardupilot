@@ -67,6 +67,7 @@ public:
         TTWMSTABILIZE  = 28,  // Definition of new mode quad tailsitter with manual tilt wings
         TTWHOVER       = 29,  // Definition of new mode quad tailsitter with tilt wings qhover mode
         TTWLOITER     = 30,  // Definition of new mode quad tailsitter with tilt wings qloiter mode
+        TTWYAW     = 31,  // Definition of new mode quad tailsitter with tilt wings qhover mode with wing assist yaw control
 #endif
 
     // Mode number 30 reserved for "offboard" for external/lua control.
@@ -942,6 +943,36 @@ protected:
     bool _enter() override;
     uint32_t last_target_loc_set_ms;
 
+#if AP_QUICKTUNE_ENABLED
+    bool supports_quicktune() const override { return true; }
+#endif
+};
+
+// Definition of new mode quad tailsitter with tilt wings qhover mode
+class ModeTTWYaw : public Mode
+{
+public:
+
+    Number mode_number() const override { return Number::TTWYAW; }
+    const char *name() const override { return "TTWYAW"; }
+    const char *name4() const override { return "TTWY"; }
+
+    bool is_vtol_mode() const override { return true; }
+    virtual bool is_vtol_man_mode() const override { return true; }
+
+    // methods that affect movement of the vehicle in this mode
+    void update() override;
+
+    void run() override;
+
+#if AP_PLANE_SYSTEMID_ENABLED
+    // does this mode support systemid?
+    bool supports_systemid() const override { return true; }
+#endif
+    
+protected:
+
+    bool _enter() override;
 #if AP_QUICKTUNE_ENABLED
     bool supports_quicktune() const override { return true; }
 #endif

@@ -530,6 +530,8 @@ public:
     AP_Float tilt_wing_y12;
     AP_Float tilt_wing_x13;
     AP_Float tilt_wing_y13;
+    // Tilt wing max yaw deflection
+    AP_Float tilt_wing_yaw_max;
 
 };
 

@@ -8,6 +8,7 @@ set wing angle output
 */
 void Plane::set_tilt_wing_out()
 {
+    //Automated tilt wing control
     if(plane.control_mode == &plane.mode_ttwstabilize || plane.control_mode == &plane.mode_ttwhover || plane.control_mode == &plane.mode_ttwloiter){
         float front_wing_out, back_wing_out;
         std::tie(front_wing_out, back_wing_out)= wing_tilt_control();
@@ -18,6 +19,53 @@ void Plane::set_tilt_wing_out()
         SRV_Channels::set_slew_rate(SRV_Channel::k_back_wing_tilt, g.flap_slewrate, 9000, G_Dt);
         return;
     }
+
+    //Yaw control with tilt wings test
+    else if(plane.control_mode == &plane.mode_ttwyaw){
+        //normal manual tilt wing control
+        float front_wing_tilt_percent = 0;
+        float back_wing_tilt_percent = 0;
+
+        front_wing_tilt_percent = rc().find_channel_for_option(RC_Channel::AUX_FUNC::WING_TILT)->norm_input_ignore_trim();
+        back_wing_tilt_percent = rc().find_channel_for_option(RC_Channel::AUX_FUNC::WING_TILT)->norm_input_ignore_trim();
+
+        float front_wing_out  = constrain_float(front_wing_tilt_percent * 4500, -4500, 4500);
+        float back_wing_out = constrain_float(back_wing_tilt_percent * 4500, -4500, 4500);
+        
+        SRV_Channels::set_output_scaled(SRV_Channel::k_front_wing_tilt, front_wing_out);
+        SRV_Channels::set_output_scaled(SRV_Channel::k_back_wing_tilt, back_wing_out);
+
+        SRV_Channels::set_slew_rate(SRV_Channel::k_front_wing_tilt, g.flap_slewrate, 9000, G_Dt);
+        SRV_Channels::set_slew_rate(SRV_Channel::k_back_wing_tilt, g.flap_slewrate, 9000, G_Dt);
+
+
+        //yaw input 
+        //ADD parameter to define max wing deflection for yaw
+        float rudder = SRV_Channels::get_output_scaled(SRV_Channel::k_rudder) *g.tilt_wing_yaw_max * 100;
+
+        float front_wing_percent = SRV_Channels::get_slew_limited_output_scaled(SRV_Channel::k_front_wing_tilt);
+        float back_wing_percent = SRV_Channels::get_slew_limited_output_scaled(SRV_Channel::k_back_wing_tilt);
+
+
+        float front_wing_out  = constrain_float(rudder + flap_percent * 45, -4500, 4500);
+        float back_wing_out = constrain_float(-rudder + flap_percent * 45, -4500, 4500);
+
+        SRV_Channels::set_output_scaled(SRV_Channel::k_front_wing_tilt, front_wing_out);
+        SRV_Channels::set_output_scaled(SRV_Channel::k_back_wing_tilt, back_wing_out);
+
+
+        float pitch_d;
+        pitch_d = degrees(quadplane.ahrs_view->pitch);
+        
+        
+        AP::logger().Write("TTW", "TimeUS,Pitch_d,frontW_d,backW_d", "Qfff",
+                                        AP_HAL::micros64(),
+                                        pitch_d,
+                                        front_wing_out/100,
+                                        back_wing_out/100);
+    }
+    
+    // Manual tilt wing control
     else {
         
         //RC_Channel *channel_tiltwing = rc().find_channel_for_option(RC_Channel::AUX_FUNC::WING_TILT);

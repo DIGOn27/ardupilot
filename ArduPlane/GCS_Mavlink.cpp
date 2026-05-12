@@ -48,6 +48,7 @@ MAV_MODE GCS_MAVLINK_Plane::base_mode() const
     case Mode::Number::TTWMSTABILIZE:
     case Mode::Number::TTWHOVER:
     case Mode::Number::TTWLOITER:
+    case Mode::Number::TTWYAW:
 #if QAUTOTUNE_ENABLED
     case Mode::Number::QAUTOTUNE:
 #endif

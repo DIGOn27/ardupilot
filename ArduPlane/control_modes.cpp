@@ -105,7 +105,9 @@ Mode *Plane::mode_from_mode_num(const enum Mode::Number num)
     case Mode::Number::TTWLOITER:
         ret = &mode_ttwloiter;
         break;
-
+    case Mode::Number::TTWYAW:
+        ret = &mode_ttwyaw;
+        break;
     }
     return ret;
 }

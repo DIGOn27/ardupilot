@@ -67,6 +67,7 @@ public:
     friend class ModeTTWMStabilize;
     friend class ModeTTWHover;
     friend class ModeTTWLoiter;
+    friend class ModeTTWYaw;
 
     QuadPlane(AP_AHRS &_ahrs);
 
