@@ -47,8 +47,8 @@ void Plane::set_tilt_wing_out()
         float back_wing_percent = SRV_Channels::get_slew_limited_output_scaled(SRV_Channel::k_back_wing_tilt);
 
 
-        float front_wing_out  = constrain_float(rudder + flap_percent * 45, -4500, 4500);
-        float back_wing_out = constrain_float(-rudder + flap_percent * 45, -4500, 4500);
+        front_wing_out  = constrain_float(rudder + flap_percent * 45, -4500, 4500);
+        back_wing_out = constrain_float(-rudder + flap_percent * 45, -4500, 4500);
 
         SRV_Channels::set_output_scaled(SRV_Channel::k_front_wing_tilt, front_wing_out);
         SRV_Channels::set_output_scaled(SRV_Channel::k_back_wing_tilt, back_wing_out);
