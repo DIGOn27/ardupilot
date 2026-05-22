@@ -40,30 +40,35 @@ void Plane::set_tilt_wing_out()
 
 
         //yaw input 
-        yaw_tilt_update();
         //ADD parameter to define max wing deflection for yaw
-        // float rudder = 10;//SRV_Channels::get_output_scaled(SRV_Channel::k_rudder) ;///45 *g.tilt_wing_yaw_max; //scale rudder input to max wing deflection for yaw
+        float rudder = 10;//SRV_Channels::get_output_scaled(SRV_Channel::k_rudder) ;///45 *g.tilt_wing_yaw_max; //scale rudder input to max wing deflection for yaw
 
-        // float front_wing_ang = SRV_Channels::get_slew_limited_output_scaled(SRV_Channel::k_front_wing_tilt);
-        // float back_wing_ang = SRV_Channels::get_slew_limited_output_scaled(SRV_Channel::k_back_wing_tilt);
+        float front_wing_ang = SRV_Channels::get_slew_limited_output_scaled(SRV_Channel::k_front_wing_tilt);
+        float back_wing_ang = SRV_Channels::get_slew_limited_output_scaled(SRV_Channel::k_back_wing_tilt);
+
+        if (front_wing_ang > front_wing_out && front_wing_out > 0 || front_wing_ang < front_wing_out && front_wing_out < 0) {
+            front_wing_ang = front_wing_out;
+        }
+        if (back_wing_ang > back_wing_out && back_wing_out > 0 || back_wing_ang < back_wing_out && back_wing_out < 0) {
+            back_wing_ang = back_wing_out;
+        }
+
+        front_wing_out  = constrain_float(rudder + front_wing_ang, -4500, 4500);
+        back_wing_out = constrain_float(-rudder + back_wing_ang, -4500, 4500);
+
+        SRV_Channels::set_output_scaled(SRV_Channel::k_front_wing_tilt, front_wing_out);
+        SRV_Channels::set_output_scaled(SRV_Channel::k_back_wing_tilt, back_wing_out);
 
 
-        // front_wing_out  = constrain_float(rudder + front_wing_ang, -4500, 4500);
-        // back_wing_out = constrain_float(-rudder + back_wing_ang, -4500, 4500);
-
-        // SRV_Channels::set_output_scaled(SRV_Channel::k_front_wing_tilt, front_wing_out);
-        // SRV_Channels::set_output_scaled(SRV_Channel::k_back_wing_tilt, back_wing_out);
-
-
-        // float pitch_d;
-        // pitch_d = degrees(quadplane.ahrs_view->pitch);
+        float pitch_d;
+        pitch_d = degrees(quadplane.ahrs_view->pitch);
         
         
-        // AP::logger().Write("TTW", "TimeUS,Pitch_d,frontW_d,backW_d", "Qfff",
-        //                                 AP_HAL::micros64(),
-        //                                 pitch_d,
-        //                                 front_wing_out/100,
-        //                                 back_wing_out/100);
+        AP::logger().Write("TTW", "TimeUS,Pitch_d,frontW_d,backW_d", "Qfff",
+                                        AP_HAL::micros64(),
+                                        pitch_d,
+                                        front_wing_out/100,
+                                        back_wing_out/100);
     }
     
     // Manual tilt wing control
@@ -180,30 +185,3 @@ AP::logger().Write("TTW", "TimeUS,Pitch_d,frontW_d,backW_d", "Qfff",
     return std::make_tuple(front_wing_out*100, back_wing_out*100); //values in centidegrees
 }
 
-
-
-void Plane::yaw_tilt_update()
-{
-    float rudder = 10;//SRV_Channels::get_output_scaled(SRV_Channel::k_rudder) ;///45 *g.tilt_wing_yaw_max; //scale rudder input to max wing deflection for yaw
-
-    float front_wing_ang = SRV_Channels::get_slew_limited_output_scaled(SRV_Channel::k_front_wing_tilt);
-    float back_wing_ang = SRV_Channels::get_slew_limited_output_scaled(SRV_Channel::k_back_wing_tilt);
-
-
-    float front_wing_out  = constrain_float(rudder + front_wing_ang, -4500, 4500);
-    float back_wing_out = constrain_float(-rudder + back_wing_ang, -4500, 4500);
-
-    SRV_Channels::set_output_scaled(SRV_Channel::k_front_wing_tilt, front_wing_out);
-    SRV_Channels::set_output_scaled(SRV_Channel::k_back_wing_tilt, back_wing_out);
-
-
-    float pitch_d;
-    pitch_d = degrees(quadplane.ahrs_view->pitch);
-    
-    
-    AP::logger().Write("TTW", "TimeUS,Pitch_d,frontW_d,backW_d", "Qfff",
-                                    AP_HAL::micros64(),
-                                    pitch_d,
-                                    front_wing_out/100,
-                                    back_wing_out/100);
-}
