@@ -41,7 +41,7 @@ void Plane::set_tilt_wing_out()
 
         //yaw input 
         //ADD parameter to define max wing deflection for yaw
-        float rudder = 1000;//SRV_Channels::get_output_scaled(SRV_Channel::k_rudder) ;///45 *g.tilt_wing_yaw_max; //scale rudder input to max wing deflection for yaw
+        float rudder = 0;//SRV_Channels::get_output_scaled(SRV_Channel::k_rudder) ;///45 *g.tilt_wing_yaw_max; //scale rudder input to max wing deflection for yaw
 
         float front_wing_ang = SRV_Channels::get_slew_limited_output_scaled(SRV_Channel::k_front_wing_tilt);
         float back_wing_ang = SRV_Channels::get_slew_limited_output_scaled(SRV_Channel::k_back_wing_tilt);
@@ -50,8 +50,8 @@ void Plane::set_tilt_wing_out()
         front_wing_out  = constrain_float(rudder + front_wing_ang, -4500, 4500);
         back_wing_out = constrain_float(-rudder + back_wing_ang, -4500, 4500);
 
-        //SRV_Channels::set_output_scaled(SRV_Channel::k_front_wing_tilt, front_wing_out);
-        //SRV_Channels::set_output_scaled(SRV_Channel::k_back_wing_tilt, back_wing_out);
+        SRV_Channels::set_output_scaled(SRV_Channel::k_front_wing_tilt, front_wing_out);
+        SRV_Channels::set_output_scaled(SRV_Channel::k_back_wing_tilt, back_wing_out);
 
 
         float pitch_d;
