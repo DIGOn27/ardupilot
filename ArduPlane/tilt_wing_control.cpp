@@ -50,8 +50,8 @@ void Plane::set_tilt_wing_out()
         front_wing_out  = constrain_float(rudder + front_wing_ang, -4500, 4500);
         back_wing_out = constrain_float(-rudder + back_wing_ang, -4500, 4500);
 
-        SRV_Channels::set_output_scaled(SRV_Channel::k_front_wing_tilt, front_wing_out);
-        SRV_Channels::set_output_scaled(SRV_Channel::k_back_wing_tilt, back_wing_out);
+        //SRV_Channels::set_output_scaled(SRV_Channel::k_front_wing_tilt, front_wing_out);
+        //SRV_Channels::set_output_scaled(SRV_Channel::k_back_wing_tilt, back_wing_out);
 
 
         float pitch_d;
