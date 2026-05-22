@@ -46,10 +46,10 @@ void Plane::set_tilt_wing_out()
         float front_wing_ang = SRV_Channels::get_slew_limited_output_scaled(SRV_Channel::k_front_wing_tilt);
         float back_wing_ang = SRV_Channels::get_slew_limited_output_scaled(SRV_Channel::k_back_wing_tilt);
 
-        if (front_wing_ang > front_wing_out && front_wing_out > 0 || front_wing_ang < front_wing_out && front_wing_out < 0) {
+        if ((front_wing_ang > front_wing_out && front_wing_out > 0) || (front_wing_ang < front_wing_out && front_wing_out < 0)) {
             front_wing_ang = front_wing_out;
         }
-        if (back_wing_ang > back_wing_out && back_wing_out > 0 || back_wing_ang < back_wing_out && back_wing_out < 0) {
+        if ((back_wing_ang > back_wing_out && back_wing_out > 0) || (back_wing_ang < back_wing_out && back_wing_out < 0)) {
             back_wing_ang = back_wing_out;
         }
 
