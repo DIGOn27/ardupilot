@@ -955,6 +955,7 @@ private:
     //tilt_wing_control.cpp
     void set_tilt_wing_out();
     std::tuple<float, float> wing_tilt_control();
+    void yaw_tilt_update();
 
 #if HAL_LOGGING_ENABLED
 
