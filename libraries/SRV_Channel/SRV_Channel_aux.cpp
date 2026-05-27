@@ -191,10 +191,12 @@ void SRV_Channel::aux_servo_function_setup(void)
     case k_pitch_out:
     case k_yaw_out:
     case k_rcin1_mapped ... k_rcin16_mapped:
+        set_angle(4500);
+        break;
     // quadcopter tilt wings
     case k_front_wing_tilt:
     case k_back_wing_tilt:
-        set_angle(4500);
+        set_angle(6000);
         break;
     case k_throttle:
     case k_throttleLeft:
