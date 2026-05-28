@@ -39,7 +39,7 @@ void Plane::set_tilt_wing_out()
         SRV_Channels::set_slew_rate(SRV_Channel::k_back_wing_tilt, g.flap_slewrate, 9000, G_Dt);
         SRV_Channels::set_slew_rate(SRV_Channel::k_front_wing_tilt, 0, 9000, G_Dt);
         // SRV_Channels::set_output_scaled(SRV_Channel::k_flap, front_wing_out);
-        // SRV_Channels::set_slew_rate(SRV_Channel::k_flap, g.flap_slewrate, 9000, G_Dt);
+        SRV_Channels::set_slew_rate(SRV_Channel::k_flap, g.flap_slewrate, 9000, G_Dt);
 
         // SRV_Channels::set_slew_rate(SRV_Channel::k_front_wing_tilt, 100, 9000, G_Dt);
         // SRV_Channels::set_slew_rate(SRV_Channel::k_back_wing_tilt, 100, 9000, G_Dt);
