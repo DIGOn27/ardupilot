@@ -26,6 +26,8 @@ void Plane::set_tilt_wing_out()
         float front_wing_tilt_percent = 0;
         float back_wing_tilt_percent = 0;
 
+        float front_wing_ang0 = SRV_Channels::get_output_scaled(SRV_Channel::k_flap);
+
         front_wing_tilt_percent = rc().find_channel_for_option(RC_Channel::AUX_FUNC::WING_TILT)->norm_input_ignore_trim();
         back_wing_tilt_percent = rc().find_channel_for_option(RC_Channel::AUX_FUNC::WING_TILT)->norm_input_ignore_trim();
 
@@ -50,18 +52,18 @@ void Plane::set_tilt_wing_out()
 
         float front_wing_ang = SRV_Channels::get_output_scaled(SRV_Channel::k_flap);
         const float max_change_tilt = 12000 * g.flap_slewrate * 0.01 * G_Dt;
-        front_wing_ang = constrain_float(front_wing_ang, front_wing_ang - max_change_tilt, front_wing_ang + max_change_tilt);
+        front_wing_ang = constrain_float(front_wing_ang, front_wing_ang0 - max_change_tilt, front_wing_ang0 + max_change_tilt);
 
         float back_wing_ang = SRV_Channels::get_slew_limited_output_scaled(SRV_Channel::k_back_wing_tilt);
         // float front_wing_ang = SRV_Channels::get_slew_limited_output_scaled(SRV_Channel::k_flap)*45;
         // float back_wing_ang = front_wing_ang;
 
-        if ((front_wing_ang > front_wing_out && front_wing_out > 0) || (front_wing_ang < front_wing_out && front_wing_out < 0)) {
-            front_wing_ang = front_wing_out;
-        }
-        if ((back_wing_ang > back_wing_out && back_wing_out > 0) || (back_wing_ang < back_wing_out && back_wing_out < 0)) {
-            back_wing_ang = back_wing_out;
-        }
+        // if ((front_wing_ang > front_wing_out && front_wing_out > 0) || (front_wing_ang < front_wing_out && front_wing_out < 0)) {
+        //     front_wing_ang = front_wing_out;
+        // }
+        // if ((back_wing_ang > back_wing_out && back_wing_out > 0) || (back_wing_ang < back_wing_out && back_wing_out < 0)) {
+        //     back_wing_ang = back_wing_out;
+        // }
 
         front_wing_out  = constrain_float(yaw_output + front_wing_out, -6000, 6000);
         back_wing_out = constrain_float(-yaw_output + back_wing_out, -6000, 6000);
