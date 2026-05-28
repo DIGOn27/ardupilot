@@ -64,6 +64,7 @@ void Plane::set_tilt_wing_out()
         // if ((back_wing_ang > back_wing_out && back_wing_out > 0) || (back_wing_ang < back_wing_out && back_wing_out < 0)) {
         //     back_wing_ang = back_wing_out;
         // }
+        back_wing_ang = constrain_float(back_wing_ang, back_wing_out-g.tilt_wing_yaw_max*100, back_wing_out+g.tilt_wing_yaw_max*100);
 
         front_wing_out  = constrain_float(yaw_output + front_wing_ang, -6000, 6000);
         back_wing_out = constrain_float(-yaw_output + back_wing_ang, -6000, 6000);
