@@ -58,12 +58,12 @@ void Plane::set_tilt_wing_out()
         // float front_wing_ang = SRV_Channels::get_slew_limited_output_scaled(SRV_Channel::k_flap)*45;
         // float back_wing_ang = front_wing_ang;
 
-        // if ((front_wing_ang > front_wing_out && front_wing_out > 0) || (front_wing_ang < front_wing_out && front_wing_out < 0)) {
-        //     front_wing_ang = front_wing_out;
-        // }
-        // if ((back_wing_ang > back_wing_out && back_wing_out > 0) || (back_wing_ang < back_wing_out && back_wing_out < 0)) {
-        //     back_wing_ang = back_wing_out;
-        // }
+        if ((front_wing_ang > front_wing_out && front_wing_out > 0) || (front_wing_ang < front_wing_out && front_wing_out < 0)) {
+            front_wing_ang = front_wing_out;
+        }
+        if ((back_wing_ang > back_wing_out && back_wing_out > 0) || (back_wing_ang < back_wing_out && back_wing_out < 0)) {
+            back_wing_ang = back_wing_out;
+        }
 
         front_wing_out  = constrain_float(yaw_output + front_wing_ang, -6000, 6000);
         back_wing_out = constrain_float(-yaw_output + back_wing_ang, -6000, 6000);
