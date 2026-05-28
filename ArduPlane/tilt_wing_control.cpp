@@ -62,7 +62,7 @@ void Plane::set_tilt_wing_out()
         front_wing_out  = constrain_float(yaw_output + front_wing_out, -6000, 6000);
         back_wing_out = constrain_float(-yaw_output + back_wing_out, -6000, 6000);
 
-        SRV_Channels::set_slew_rate(SRV_Channel::k_front_wing_tilt, 100, 9000, G_Dt);
+        //SRV_Channels::set_slew_rate(SRV_Channel::k_front_wing_tilt, 100, 9000, G_Dt);
         
         SRV_Channels::set_output_scaled(SRV_Channel::k_front_wing_tilt, front_wing_out);
         SRV_Channels::set_output_scaled(SRV_Channel::k_back_wing_tilt, back_wing_out);
