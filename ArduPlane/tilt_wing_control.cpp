@@ -32,10 +32,10 @@ void Plane::set_tilt_wing_out()
         float front_wing_out  = constrain_float(front_wing_tilt_percent * 6000, -6000, 6000);
         float back_wing_out = constrain_float(back_wing_tilt_percent * 6000, -6000, 6000);
         
-        SRV_Channels::set_output_scaled(SRV_Channel::k_flaperon_left, front_wing_out);
+        SRV_Channels::set_output_scaled(SRV_Channel::k_flap, front_wing_out);
         SRV_Channels::set_output_scaled(SRV_Channel::k_back_wing_tilt, back_wing_out);
 
-        SRV_Channels::set_slew_rate(SRV_Channel::k_flaperon_left, g.flap_slewrate, 9000, G_Dt);
+        SRV_Channels::set_slew_rate(SRV_Channel::k_flap, g.flap_slewrate, 9000, G_Dt);
         SRV_Channels::set_slew_rate(SRV_Channel::k_back_wing_tilt, g.flap_slewrate, 9000, G_Dt);
         // SRV_Channels::set_output_scaled(SRV_Channel::k_flap, front_wing_out);
         // SRV_Channels::set_slew_rate(SRV_Channel::k_flap, g.flap_slewrate, 9000, G_Dt);
@@ -47,7 +47,7 @@ void Plane::set_tilt_wing_out()
         //ADD parameter to define max wing deflection for yaw
         float yaw_output = abs(quadplane.get_desired_yaw_rate_cds(true) / (100*quadplane.command_model_pilot.get_rate()) * g.tilt_wing_yaw_max*100);//SRV_Channels::get_output_scaled(SRV_Channel::k_rudder) ;///45 *g.tilt_wing_yaw_max; //scale rudder input to max wing deflection for yaw
 
-        float front_wing_ang = SRV_Channels::get_slew_limited_output_scaled(SRV_Channel::k_flaperon_left);
+        float front_wing_ang = SRV_Channels::get_slew_limited_output_scaled(SRV_Channel::k_flap);
         float back_wing_ang = SRV_Channels::get_slew_limited_output_scaled(SRV_Channel::k_back_wing_tilt);
         // float front_wing_ang = SRV_Channels::get_slew_limited_output_scaled(SRV_Channel::k_flap)*45;
         // float back_wing_ang = front_wing_ang;
