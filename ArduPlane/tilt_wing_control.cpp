@@ -114,7 +114,7 @@ std::tuple<float, float> Plane::wing_tilt_control()
     pitch_rad = quadplane.ahrs_view->pitch;
     pitch_d = degrees(pitch_rad);
 
-    pitch_d = constrain_float(pitch_d, -quadplane.aparm.angle_max, quadplane.aparm.angle_max); //constrain pitch to be within max angle limit
+    pitch_d = constrain_float(pitch_d, -quadplane.aparm.angle_max/100, quadplane.aparm.angle_max/100); //constrain pitch to be within max angle limit
 
     if (pitch_d < 0.0) { //if negative pitch, use positive to get wing angle from table, then negate output to get correct direction of tilt
         float neg_pitch_d = -pitch_d;
