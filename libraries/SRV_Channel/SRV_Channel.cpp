@@ -366,6 +366,8 @@ bool SRV_Channel::is_control_surface(SRV_Channel::Aux_servo_function_t function)
     // quadcopter tilt wings
     case SRV_Channel::Aux_servo_function_t::k_front_wing_tilt:
     case SRV_Channel::Aux_servo_function_t::k_back_wing_tilt:
+    case SRV_Channel::Aux_servo_function_t::k_wing_tilt:
+    case SRV_Channel::Aux_servo_function_t::k_wing_tilt_yaw:
         return true;
 
     default:

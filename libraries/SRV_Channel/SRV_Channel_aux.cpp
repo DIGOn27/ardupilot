@@ -196,6 +196,8 @@ void SRV_Channel::aux_servo_function_setup(void)
     // quadcopter tilt wings
     case k_front_wing_tilt:
     case k_back_wing_tilt:
+    case k_wing_tilt:
+    case k_wing_tilt_yaw:
         set_angle(6000);
         break;
     case k_throttle:

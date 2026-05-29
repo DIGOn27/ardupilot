@@ -23,23 +23,25 @@ void Plane::set_tilt_wing_out()
     //Yaw control with tilt wings test
     else if(plane.control_mode == &plane.mode_ttwyaw){
         //normal manual tilt wing control
-        float front_wing_tilt_percent = 0;
-        float back_wing_tilt_percent = 0;
 
-        float front_wing_ang0 = SRV_Channels::get_output_scaled(SRV_Channel::k_flap);
+        //float front_wing_tilt_percent = rc().find_channel_for_option(RC_Channel::AUX_FUNC::WING_TILT)->norm_input_ignore_trim();
+        //float back_wing_tilt_percent = rc().find_channel_for_option(RC_Channel::AUX_FUNC::WING_TILT)->norm_input_ignore_trim();
+        float wing_tilt_percent = rc().find_channel_for_option(RC_Channel::AUX_FUNC::WING_TILT)->norm_input_ignore_trim();
 
-        front_wing_tilt_percent = rc().find_channel_for_option(RC_Channel::AUX_FUNC::WING_TILT)->norm_input_ignore_trim();
-        back_wing_tilt_percent = rc().find_channel_for_option(RC_Channel::AUX_FUNC::WING_TILT)->norm_input_ignore_trim();
+        //float front_wing_out  = constrain_float(front_wing_tilt_percent * 6000, -6000, 6000);
+        //float back_wing_out = constrain_float(back_wing_tilt_percent * 6000, -6000, 6000);
+        float wing_out = constrain_float(wing_tilt_percent * 6000, -6000, 6000);
 
-        float front_wing_out  = constrain_float(front_wing_tilt_percent * 6000, -6000, 6000);
-        float back_wing_out = constrain_float(back_wing_tilt_percent * 6000, -6000, 6000);
+        SRV_Channels::set_output_scaled(SRV_Channel::k_wing_tilt, wing_out);
+        SRV_Channels::set_slew_rate(SRV_Channel::k_wing_tilt, g.flap_slewrate, 9000, G_Dt);
         
-        SRV_Channels::set_output_scaled(SRV_Channel::k_flap, front_wing_out);
-        SRV_Channels::set_output_scaled(SRV_Channel::k_back_wing_tilt, back_wing_out);
+        //SRV_Channels::set_output_scaled(SRV_Channel::k_flap, front_wing_out/60);
+        //SRV_Channels::set_output_scaled(SRV_Channel::k_back_wing_tilt, back_wing_out);
 
         //SRV_Channels::set_slew_rate(SRV_Channel::k_flap, g.flap_slewrate, 9000, G_Dt);
-        SRV_Channels::set_slew_rate(SRV_Channel::k_back_wing_tilt, g.flap_slewrate, 9000, G_Dt);
+        //SRV_Channels::set_slew_rate(SRV_Channel::k_back_wing_tilt, g.flap_slewrate, 9000, G_Dt);
         SRV_Channels::set_slew_rate(SRV_Channel::k_front_wing_tilt, 0, 9000, G_Dt);
+        SRV_Channels::set_slew_rate(SRV_Channel::k_back_wing_tilt, 0, 9000, G_Dt);
         // SRV_Channels::set_output_scaled(SRV_Channel::k_flap, front_wing_out);
         
 
@@ -49,27 +51,23 @@ void Plane::set_tilt_wing_out()
         //yaw input 
         //ADD parameter to define max wing deflection for yaw
         float yaw_output = abs(quadplane.get_desired_yaw_rate_cds(true) / (100*quadplane.command_model_pilot.get_rate()) * g.tilt_wing_yaw_max*100);//SRV_Channels::get_output_scaled(SRV_Channel::k_rudder) ;///45 *g.tilt_wing_yaw_max; //scale rudder input to max wing deflection for yaw
+        //SRV_Channels::set_output_scaled(SRV_Channel::k_wing_tilt_yaw, yaw_output);
 
-        float front_wing_ang = SRV_Channels::get_output_scaled(SRV_Channel::k_flap)*45;
-        const float max_change_tilt = 12000 * g.flap_slewrate * 0.01 * G_Dt;
-        front_wing_ang = constrain_float(front_wing_ang, front_wing_ang0 - max_change_tilt, front_wing_ang0 + max_change_tilt);
+        float front_wing_ang = SRV_Channels::get_slew_limited_output_scaled(SRV_Channel::k_wing_tilt);
 
         float back_wing_ang = SRV_Channels::get_slew_limited_output_scaled(SRV_Channel::k_back_wing_tilt);
-        // float front_wing_ang = SRV_Channels::get_slew_limited_output_scaled(SRV_Channel::k_flap)*45;
-        // float back_wing_ang = front_wing_ang;
 
-        if ((front_wing_ang > front_wing_out && front_wing_out > 0) || (front_wing_ang < front_wing_out && front_wing_out < 0)) {
-            front_wing_ang = front_wing_out;
-        }
+        // if ((front_wing_ang > front_wing_out && front_wing_out > 0) || (front_wing_ang < front_wing_out && front_wing_out < 0)) {
+        //     front_wing_ang = front_wing_out;
+        // }
         // if ((back_wing_ang > back_wing_out && back_wing_out > 0) || (back_wing_ang < back_wing_out && back_wing_out < 0)) {
         //     back_wing_ang = back_wing_out;
         // }
         back_wing_ang = constrain_float(back_wing_ang, back_wing_out-g.tilt_wing_yaw_max*100, back_wing_out+g.tilt_wing_yaw_max*100);
 
-        front_wing_out  = constrain_float(yaw_output + front_wing_ang, -6000, 6000);
-        back_wing_out = constrain_float(-yaw_output + back_wing_ang, -6000, 6000);
+        float front_wing_out  = constrain_float(yaw_output + front_wing_ang, -6000, 6000);
+        float back_wing_out = constrain_float(-yaw_output + back_wing_ang, -6000, 6000);
 
-        SRV_Channels::set_slew_rate(SRV_Channel::k_back_wing_tilt, 0, 9000, G_Dt);
         SRV_Channels::set_output_scaled(SRV_Channel::k_front_wing_tilt, front_wing_out);
         SRV_Channels::set_output_scaled(SRV_Channel::k_back_wing_tilt, back_wing_out);
 

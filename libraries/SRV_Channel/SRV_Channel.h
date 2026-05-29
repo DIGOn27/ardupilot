@@ -192,6 +192,8 @@ public:
         // quadcopter wing tilt servos
         k_front_wing_tilt         = 190,    //  front wing tilt
         k_back_wing_tilt          = 191,    // back wing tilt
+        k_wing_tilt               = 192,    // wing tilt, used for single tilt wing
+        k_wing_tilt_yaw           = 193,    // wing tilt for yaw
         k_nr_aux_servo_functions         ///< This must be the last enum value (only add new values _before_ this one)
     } Aux_servo_function_t;
 
