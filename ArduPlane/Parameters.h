@@ -391,7 +391,7 @@ public:
         k_param_tilt_wing_y12,
         k_param_tilt_wing_x13,
         k_param_tilt_wing_y13,
-        k_param_tilt_wing_yaw_max,
+        k_param_twing_yaw_max,
 
     };
 
@@ -532,7 +532,7 @@ public:
     AP_Float tilt_wing_x13;
     AP_Float tilt_wing_y13;
     // Tilt wing max yaw deflection
-    AP_Float tilt_wing_yaw_max;
+    AP_Float twing_yaw_max;
 
 };
 
